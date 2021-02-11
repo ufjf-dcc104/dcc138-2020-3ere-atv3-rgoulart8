@@ -23,8 +23,11 @@
             ctx.fillRect(0,0, canvas.width, canvas.height);
         }
         
-        let l = 2;
-        let c = 1;
+        let pose = 0;
+        let quadro = 0;
+        const POSES = [
+            8, 8, 8, 8, 8, 8, 8, 8
+        ];
 
         function terminouDeCarregar() {
             
@@ -40,23 +43,19 @@
             dt = (t - t0)/1000;
             desenhaFundo();
 
-            c = c + 8*dt;
-           
-            if (c > 8) {
-                c = 0;
-            }
-
+            quadro = (quadro >= POSES[pose]-1) ? 0 : quadro + 9*dt; 
+             
             ctx.drawImage(skelly, 
             // sx, sy, sw, sh
-            Math.floor(c)*130, l*130, 130, 130,
+            Math.floor(quadro)*130, pose*130, 130, 130,
             // dx, dy, de, dh
             0, 0, 130, 130);
             
             requestAnimationFrame (passo);
             t0 = t;
-            
-            
         }
+            
+        
         
     </script>
 </body>
