@@ -14,24 +14,48 @@
         const canvas = document.querySelector("canvas");
         const ctx = canvas.getContext("2d");
         const skelly = new Image();
-        skelly.src = "assets/elf.png";
+        skelly.src = "assets/anda.png";
 
         skelly.addEventListener("load", terminouDeCarregar);
 
-        ctx.fillStyle = "lightblue";
-        ctx.fillRect(0,0, canvas.width, canvas.height);
+        function desenhaFundo() {
+            ctx.fillStyle = "blue";
+            ctx.fillRect(0,0, canvas.width, canvas.height);
+        }
+        
         let l = 2;
         let c = 1;
 
         function terminouDeCarregar() {
+            
+            }
+
+        let t0;
+        let dt;
+
+        requestAnimationFrame (passo);
+        function passo(t) {
+
+            t0 = t0 ?? t;
+            dt = (t - t0)/1000;
+            desenhaFundo();
+
+            c = c + 8*dt;
+           
+            if (c > 8) {
+                c = 0;
+            }
+
             ctx.drawImage(skelly, 
             // sx, sy, sw, sh
-            c*64, l*64, 64, 64,
+            Math.floor(c)*130, l*130, 130, 130,
             // dx, dy, de, dh
-            0, 0, 64, 64
-
+            0, 0, 130, 130);
             
-            );
+            requestAnimationFrame (passo);
+            t0 = t;
+            
+            
         }
         
     </script>
